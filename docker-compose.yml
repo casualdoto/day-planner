@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: day_planner
+      POSTGRES_PASSWORD: day_planner
+      POSTGRES_DB: day_planner
+    ports:
+      - "5432:5432"
+    volumes:
+      - day_planner_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U day_planner -d day_planner"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      target: runtime
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DAY_PLANNER_ADDR: 0.0.0.0:8080
+      DAY_PLANNER_DATABASE_URL: postgres://day_planner:day_planner@db:5432/day_planner?sslmode=disable
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  test:
+    build:
+      context: .
+      target: go-builder
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DAY_PLANNER_TEST_DATABASE_URL: postgres://day_planner:day_planner@db:5432/day_planner?sslmode=disable
+    command: go test ./...
+
+volumes:
+  day_planner_postgres_data:

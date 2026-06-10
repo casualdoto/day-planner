@@ -18,6 +18,13 @@ coverage.out
 go.work
 go.work.sum
 vendor/
+node_modules/
+frontend/node_modules/
+.gocache/
+.gomodcache/
+.gopath/
+.gotelemetry/
+.npm-cache/
 
 # Environment files
 .env
