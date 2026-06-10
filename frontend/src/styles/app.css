@@ -370,7 +370,11 @@ textarea {
 }
 
 @media (max-width: 900px) {
-  .app-shell,
+  .app-shell {
+    display: block;
+    min-height: 0;
+  }
+
   .today-layout,
   .calendar-layout {
     grid-template-columns: 1fr;
@@ -379,7 +383,7 @@ textarea {
   .sidebar {
     border-bottom: 1px solid #dfe8e2;
     border-right: 0;
-    padding: 1rem;
+    padding: 0.9rem 1rem 0.75rem;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -408,6 +412,8 @@ textarea {
   .page-header {
     align-items: flex-start;
     flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
   }
 
   .page-header input[type="date"] {
@@ -433,5 +439,18 @@ textarea {
   .tag-list li {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .tag-form {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .tag-form input:not([type]),
+  .tag-form input[type="text"] {
+    grid-column: 1 / -1;
+  }
+
+  .tag-form button {
+    width: auto;
   }
 }

@@ -52,7 +52,7 @@ onMounted(load)
       </div>
     </header>
     <p v-if="error" class="error">{{ error }}</p>
-    <form class="task-form" @submit.prevent="addTag">
+    <form class="task-form tag-form" @submit.prevent="addTag">
       <input v-model="name" placeholder="Tag name" />
       <label class="color-control" title="Choose tag color">
         <span class="color-swatch" :style="{ backgroundColor: color }"></span>
