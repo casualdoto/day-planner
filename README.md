@@ -49,7 +49,12 @@ go test ./...
 PostgreSQL integration tests:
 
 ```powershell
-$env:DAY_PLANNER_TEST_DATABASE_URL = "postgres://day_planner:day_planner@localhost:5432/day_planner?sslmode=disable"
+$env:DAY_PLANNER_DB_HOST = "localhost"
+$env:DAY_PLANNER_DB_PORT = "5432"
+$env:DAY_PLANNER_DB_USER = "day_planner"
+$env:DAY_PLANNER_DB_PASSWORD = "day_planner"
+$env:DAY_PLANNER_DB_NAME = "day_planner"
+$env:DAY_PLANNER_DB_SSLMODE = "disable"
 go test ./...
 ```
 

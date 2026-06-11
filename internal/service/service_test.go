@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"net/url"
-	"os"
 	"testing"
 	"time"
 
@@ -23,9 +22,9 @@ type services struct {
 
 func newServices(t *testing.T) services {
 	t.Helper()
-	databaseURL := os.Getenv("DAY_PLANNER_TEST_DATABASE_URL")
-	if databaseURL == "" {
-		t.Skip("set DAY_PLANNER_TEST_DATABASE_URL to run Postgres integration tests")
+	databaseURL, err := db.URLFromEnv()
+	if err != nil {
+		t.Skip("set DAY_PLANNER_DB_* to run Postgres integration tests")
 	}
 	conn, err := openTestDatabase(t, databaseURL)
 	if err != nil {

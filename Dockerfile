@@ -36,7 +36,6 @@ COPY --from=go-builder /out/day-planner /app/day-planner
 COPY --from=frontend-builder /app/frontend/dist /app/frontend/dist
 
 ENV DAY_PLANNER_ADDR=0.0.0.0:8080
-ENV DAY_PLANNER_DATABASE_URL=postgres://day_planner:day_planner@localhost:5432/day_planner?sslmode=disable
 
 EXPOSE 8080
 

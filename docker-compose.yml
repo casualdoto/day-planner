@@ -24,7 +24,12 @@ services:
         condition: service_healthy
     environment:
       DAY_PLANNER_ADDR: 0.0.0.0:8080
-      DAY_PLANNER_DATABASE_URL: postgres://day_planner:day_planner@db:5432/day_planner?sslmode=disable
+      DAY_PLANNER_DB_HOST: db
+      DAY_PLANNER_DB_PORT: 5432
+      DAY_PLANNER_DB_USER: day_planner
+      DAY_PLANNER_DB_PASSWORD: day_planner
+      DAY_PLANNER_DB_NAME: day_planner
+      DAY_PLANNER_DB_SSLMODE: disable
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -37,7 +42,12 @@ services:
       db:
         condition: service_healthy
     environment:
-      DAY_PLANNER_TEST_DATABASE_URL: postgres://day_planner:day_planner@db:5432/day_planner?sslmode=disable
+      DAY_PLANNER_DB_HOST: db
+      DAY_PLANNER_DB_PORT: 5432
+      DAY_PLANNER_DB_USER: day_planner
+      DAY_PLANNER_DB_PASSWORD: day_planner
+      DAY_PLANNER_DB_NAME: day_planner
+      DAY_PLANNER_DB_SSLMODE: disable
     command: go test ./...
 
 volumes:
